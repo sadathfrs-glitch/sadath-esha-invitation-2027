@@ -63,30 +63,37 @@ h3{font-weight:400;color:var(--ink);font-size:25px;font-variant:small-caps;lette
 .js .rv{opacity:0;transform:translateY(12px);transition:opacity 1s ease,transform 1s ease}
 .js .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .rv{opacity:1;transform:none;transition:none}}
-#op{display:none;position:fixed;inset:0;z-index:50;background-color:#e7d8ba;transition:background-color 1.2s ease .2s}
+#op{display:none;position:fixed;inset:0;z-index:50;background:transparent;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .js #op{display:block}
 .js body.lock{overflow:hidden}
-#op.go{background-color:transparent;pointer-events:none}
-.stg{position:absolute;inset:0;max-width:520px;margin:0 auto;overflow:hidden}
-.fl{position:absolute;inset:0;background:var(--img) center/cover #f7e9cc;background-blend-mode:multiply;transition:transform 1.5s cubic-bezier(.7,0,.2,1)}
-.fl.t{clip-path:polygon(0 0,100% 0,50% 50%);filter:brightness(1.04)}
-.fl.l{clip-path:polygon(0 0,50% 50%,0 100%);filter:brightness(.97)}
-.fl.r{clip-path:polygon(100% 0,100% 100%,50% 50%);filter:brightness(.93)}
-.fl.b{clip-path:polygon(0 100%,50% 50%,100% 100%);filter:brightness(.99)}
-.go .t{transform:translateY(-105%)}.go .b{transform:translateY(105%)}.go .l{transform:translateX(-105%)}.go .r{transform:translateX(105%)}
-.ln{position:absolute;inset:0;width:100%;height:100%;transition:opacity .5s}
-.go .ln,.go .ot,.go .ob,.go .tap{opacity:0}
-.ot,.ob,.tap{position:absolute;left:0;right:0;text-align:center;transition:opacity .5s}
+#op.go{pointer-events:none}
+.stg{position:absolute;inset:0;max-width:520px;margin:0 auto;overflow:hidden;perspective:1400px;perspective-origin:50% 50%;transform-style:preserve-3d;background:transparent}
+.fl{position:absolute;inset:0;background:var(--img) center/cover #f7e9cc;background-blend-mode:multiply}
+.fl.t,.fl.b{display:none}
+.fl.l,.fl.r{top:0;bottom:0;width:50.5%;overflow:hidden;clip-path:none;filter:none;transform:translate3d(0,0,0) rotateY(0);transform-style:preserve-3d;-webkit-backface-visibility:hidden;backface-visibility:hidden;will-change:transform;transition:transform 1.8s cubic-bezier(.68,0,.2,1) .12s}
+.fl.l{left:0;right:auto;border-right:1px solid rgba(176,141,60,.75)}
+.fl.r{right:0;left:auto;border-left:1px solid rgba(176,141,60,.75)}
+.fl.l::before,.fl.r::before{content:"";position:absolute;top:0;bottom:0;width:200%;background-image:linear-gradient(rgba(243,224,186,.5),rgba(243,224,186,.5)),var(--img);background-size:auto,100% 100%;background-position:center,left center;background-repeat:no-repeat;background-blend-mode:normal,multiply}
+.fl.l::before{left:0}
+.fl.r::before{right:0;background-position:center,right center}
+.fl.l::after,.fl.r::after{content:"";position:absolute;top:0;bottom:0;width:32px;pointer-events:none}
+.fl.l::after{right:0;background:linear-gradient(90deg,transparent,rgba(38,8,19,.26))}
+.fl.r::after{left:0;background:linear-gradient(270deg,transparent,rgba(38,8,19,.26))}
+.go .fl.l{transform:translate3d(-8%,0,0) rotateY(-112deg);transform-origin:100% 50%}
+.go .fl.r{transform:translate3d(8%,0,0) rotateY(112deg);transform-origin:0 50%}
+.ln{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;transition:transform .5s cubic-bezier(.7,0,.3,1)}
+.go .ln,.go .ot,.go .ob,.go .tap{transform:translate3d(0,-110vh,0)}
+.ot,.ob,.tap{position:absolute;left:0;right:0;text-align:center;transition:transform .55s cubic-bezier(.7,0,.3,1)}
 .ot{top:13%}.ob{bottom:11%}.tap{top:calc(50% + 66px)}
 .ot .bism{font-size:28px;margin:0}
 .ob .names{font-size:30px;letter-spacing:.14em;margin-bottom:6px}
-.seal{position:absolute;left:50%;top:50%;width:92px;height:92px;margin:-46px 0 0 -46px;border:0;border-radius:50%;cursor:pointer;padding:0;background:radial-gradient(circle at 32% 28%,#f1dc9a,#c9a64e 55%,#9a7627);box-shadow:0 6px 16px rgba(110,80,20,.45),inset 0 0 0 5px rgba(255,236,170,.35),inset 0 0 0 6px rgba(120,88,24,.35);color:#6a4f14;font:500 29px/1 'Cormorant Garamond',Georgia,serif;transition:transform .7s ease,opacity .7s ease}
+.seal{-webkit-appearance:none;appearance:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent;position:absolute;left:50%;top:50%;width:92px;height:92px;margin:-46px 0 0 -46px;border:0;border-radius:50%;cursor:pointer;padding:0;background:radial-gradient(circle at 32% 28%,#f1dc9a,#c9a64e 55%,#9a7627);box-shadow:0 6px 16px rgba(110,80,20,.45),inset 0 0 0 5px rgba(255,236,170,.35),inset 0 0 0 6px rgba(120,88,24,.35);color:#6a4f14;font:500 29px/1 'Cormorant Garamond',Georgia,serif;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
 .seal i{font-size:22px;margin:0 1px}
 .seal::after{content:"";position:absolute;inset:0;border-radius:50%;animation:pr 2.4s ease-out infinite}
 .seal:focus-visible{outline:2px solid #6b5a35;outline-offset:5px}
-.go .seal{transform:scale(1.7);opacity:0}
+.go .seal{transform:scale(1.4) rotate(18deg) translateY(-8px)}
 @keyframes pr{0%{box-shadow:0 0 0 0 rgba(176,141,60,.5)}100%{box-shadow:0 0 0 24px rgba(176,141,60,0)}}
-@media (prefers-reduced-motion:reduce){.seal::after{animation:none}.fl{transition-duration:.01s}}
+@media (prefers-reduced-motion:reduce){.seal::after{animation:none}.fl.l,.fl.r{transition-duration:1s;transition-delay:0s}}
 .mus{position:fixed;bottom:0;right:max(16px,calc(50vw - 244px));margin-bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;display:flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink);font:500 11px/1 'DM Sans',system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;box-shadow:4px 5px 14px var(--sh1),-3px -3px 8px var(--sh2)}
 .mus:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 .eq{display:flex;align-items:flex-end;gap:2px;height:12px}
@@ -96,31 +103,9 @@ h3{font-weight:400;color:var(--ink);font-size:25px;font-variant:small-caps;lette
 @keyframes eq{to{height:12px}}
 @media (prefers-reduced-motion:reduce){.mus.on .eq i{animation:none;height:10px}}
 
-/* iPhone Safari: use a simple fade instead of clipped-panel transforms */
+/* Keep the hinged-cover reveal stable in iPhone Safari's dynamic viewport. */
 @supports (-webkit-touch-callout: none) {
-  #op {
-    height: 100%;
-    height: 100dvh;
-    transition: opacity .9s ease, visibility 0s linear .9s;
-  }
-  .stg {
-    height: 100%;
-    height: 100dvh;
-  }
-  .fl {
-    clip-path: none !important;
-    filter: none !important;
-    transition: opacity .8s ease !important;
-  }
-  #op.go {
-    opacity: 0;
-    visibility: hidden;
-    background-color: #e7d8ba;
-  }
-  #op.go .fl {
-    transform: none !important;
-    opacity: 0;
-  }
+  #op,.stg{height:100vh;height:100dvh}
 }
 </style>
 </head>
@@ -235,7 +220,7 @@ h3{font-weight:400;color:var(--ink);font-size:25px;font-variant:small-caps;lette
   au.volume=.8;
   sl.addEventListener('click',function(){
     op.classList.add('go');document.body.classList.remove('lock');window.scrollTo(0,0);play();
-    setTimeout(function(){op.style.display='none'},1900);
+    setTimeout(function(){op.style.display='none'},2200);
   });
   var els=document.querySelectorAll('.rv');
   if('IntersectionObserver' in window){
